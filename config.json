@@ -1,22 +1,28 @@
 {
-    "bateria_m1": {
-        "critico_min": 11.0,
-        "critico_max": 15.0,
-        "alerta_min_inf": 11.0,
-        "alerta_max_inf": 11.9,
-        "alerta_min_sup": 14.6,
-        "alerta_max_sup": 15.0
-    },
-    "pressao_cabine": {
-        "critico_min": 12.0,
-        "critico_max": 14.7,
-        "alerta_min": 12.0,
-        "alerta_max": 13.4
-    },
-    "temp_nucleo": {
-        "critico_min": 0.0,
-        "critico_max": 90.0,
-        "alerta_min": 75.1,
-        "alerta_max": 90.0
-    }
+  "bateria_m1": {
+    "critico_min": 11.0,
+    "critico_max": 15.0,
+    "alerta_min_inf": 11.0,
+    "alerta_max_inf": 11.9,
+    "alerta_min_sup": 14.6,
+    "alerta_max_sup": 15.0
+  },
+  "pressao_cabine": {
+    "critico_min": 12.0,
+    "critico_max": 14.7,
+    "alerta_min": 12.0,
+    "alerta_max": 13.4
+  },
+  "temp_nucleo": {
+    "critico_min": 0.0,
+    "critico_max": 90.0,
+    "alerta_min": 75.1,
+    "alerta_max": 90.0
+  },
+  "sensor_proximidade": {
+    "critico_min": 0.0,
+    "alerta_min": 50.0,
+    "alerta_max": 150.0,
+    "critico_max": 400.0
+  }
 }
