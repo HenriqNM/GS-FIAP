@@ -32,9 +32,9 @@
     "regra_classe": "ValidacaoLimiteSimples",
     "parametros": {
       "critico_min": 0.0,
+      "critico_max": 400.0,
       "alerta_min": 50.0,
-      "alerta_max": 150.0,
-      "critico_max": 400.0
+      "alerta_max": 150.0
     }
   }
 }
