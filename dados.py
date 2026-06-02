@@ -22,5 +22,13 @@ logs_telemetria = [
     {"sensor": "bateria_m1", "leitura": 10.1, "unidade": "V", "timestamp": "2026-05-26T10:04:00"},
     {"sensor": "temp_nucleo", "leitura": 89.5, "unidade": "C", "timestamp": "2026-05-26T10:04:15"},
     {"sensor": "pressao_cabine", "leitura": 11.9, "unidade": "psi", "timestamp": "2026-05-26T10:04:30"},
-    {"sensor": "sensor_proximidade", "leitura": 32.7, "unidade": "cm", "timestamp": "2026-05-26T10:04:45"}
+    {"sensor": "sensor_proximidade", "leitura": 32.7, "unidade": "cm", "timestamp": "2026-05-26T10:04:45"},
+
+    # DADOS CORROMPIDOS PARA TESTE DE EXCEÇÃO
+
+    {"sensor": "bateria_m1", "leitura": "DISCONNECTED", "unidade": "V", "timestamp": "2026-05-26T10:05:00"},
+    {"sensor": "temp_nucleo", "unidade": "C", "timestamp": "2026-05-26T10:05:15"},
+    {"sensor": "sensor_fantasma_99", "leitura": 45.2, "unidade": "N/A", "timestamp": "2026-05-26T10:05:30"},
+    {"sensor": "pressao_cabine", "leitura": [12.5, 13.0], "unidade": "psi", "timestamp": "2026-05-26T10:05:45"},
+    ["sensor_proximidade", 0.0, "cm"]
 ]

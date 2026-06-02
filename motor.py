@@ -8,15 +8,31 @@ class MotorAnalise:
         self.config: Dict[str, Dict[str, float]] = config
 
     def adicionar_leitura(self, sensor: str, valor: float) -> Tuple[float, str]:
-        buffer: deque[float] = self.historico[sensor]
-        buffer.append(valor)
-        media: float = sum(buffer) / len(buffer)
+        try:
+            if sensor not in self.historico:
+                return 0.0, "Dado corrompido"
 
-        info_limite: Dict[str, float] = self.config[sensor]
-        nome_classe: str = info_limite["regra_classe"]
-        valores: Dict[str, float] = info_limite["parametros"]
+            buffer: deque[float] = self.historico[sensor]
+            valor_float: float = float(valor)
+            buffer.append(valor_float)
+            media: float = sum(buffer) / len(buffer)
 
-        instancia_regra = getattr(regras, nome_classe)()
+            if sensor not in self.config:
+                return media, "Dado corrompido"
 
-        status: str = instancia_regra.validar(media, valores)
-        return media, status
+            info_limite: Dict[str, float] = self.config[sensor]
+            nome_classe: str = info_limite["regra_classe"]
+            valores: Dict[str, float] = info_limite["parametros"]
+            try:
+                instancia_regra = getattr(regras, nome_classe)()
+            except AttributeError:
+                return media, "Dado corrompido"
+
+            try:
+                status: str = instancia_regra.validar(media, valores)
+                return media, status
+            except Exception:
+                return media, "Dado corrompido"
+
+        except (ValueError, KeyError, TypeError):
+            return 0.0, "Dado corrompido"
