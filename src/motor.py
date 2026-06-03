@@ -1,6 +1,6 @@
 from collections import deque
 from typing import Dict, Tuple, Any
-import regras
+from src import regras
 
 class MotorAnalise:
     def __init__(self, config: Dict[str, Dict[str, Any]]) -> None:
