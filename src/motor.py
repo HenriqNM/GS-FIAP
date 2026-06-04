@@ -5,7 +5,7 @@ from src import regras
 class MotorAnalise:
     def __init__(self, config: Dict[str, Dict[str, Any]]) -> None:
         self.historico: Dict[str, deque[float]] = {sensor: deque(maxlen=3) for sensor in config.keys()}
-        self.config: Dict[str, Dict[str, float]] = config
+        self.config: Dict[str, Dict[str, Any]] = config
 
     def adicionar_leitura(self, sensor: str, valor: float) -> Tuple[float, str]:
         try:
@@ -20,7 +20,7 @@ class MotorAnalise:
             if sensor not in self.config:
                 return media, "Dado corrompido"
 
-            info_limite: Dict[str, float] = self.config[sensor]
+            info_limite: Dict[str, Any] = self.config[sensor]
             nome_classe: str = info_limite["regra_classe"]
             valores: Dict[str, float] = info_limite["parametros"]
             try:

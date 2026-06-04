@@ -1,7 +1,7 @@
 from pathlib import Path
-from dados import logs_telemetria
 from typing import Dict, Any, List
-from motor import MotorAnalise
+from .dados import logs_telemetria
+from .motor import MotorAnalise
 import json
 
 def main() -> None:
@@ -19,7 +19,7 @@ def main() -> None:
     }
 
     motor: MotorAnalise = MotorAnalise(config_sensores)
-    logs: List[Dict[str, Any]] = logs_telemetria
+    logs: List[Any] = logs_telemetria
 
     for log in logs:
         try:

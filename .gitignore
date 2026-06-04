@@ -1,6 +1,10 @@
-# Byte-compiled / optimized / DLLs
+# Ambiente Virtual
+.venv/
+venv/
+env/
+
+# Caches do Python e Ferramentas de Teste
 __pycache__/
 *.pyc
-
-# PyCharm local configurations
-.idea/
+.mypy_cache/
+.pytest_cache/
