@@ -1,4 +1,4 @@
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Tuple
 from src.motor import MotorAnalise
 
 def processar_telemetria(logs: list, motor: MotorAnalise) -> dict[str, tuple[list[int], list[float]]]:
