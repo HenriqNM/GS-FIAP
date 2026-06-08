@@ -4,6 +4,15 @@ Sistema modular para processamento, análise estatística e validação de fluxo
 
 ---
 
+## Integrantes
+
+Henrique Nunes Mororó — RM 574073
+
+Bernardo de Paula Rodrigues — RM 572376
+
+Arthur Moreira Costa — RM 571532
+
+
 ## Arquitetura do Projeto
 
 O projeto é dividido em quatro módulos principais:
