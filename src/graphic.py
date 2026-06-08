@@ -9,7 +9,7 @@ def gerar_grafico(nome_sensor: str, indices: List[int], medias: List[float]) -> 
         return
 
     print(f"\nGerando gráfico de variação para o sensor: {nome_sensor}...")
-    time.sleep(3)
+    time.sleep(2)
 
     plt.figure(figsize=(10, 5))
     plt.plot(indices, medias, marker='o', linestyle='-', color='g', label=f'Média Móvel ({nome_sensor})')
