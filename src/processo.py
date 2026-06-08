@@ -1,7 +1,7 @@
 from typing import List, Dict, Any, Tuple
 from src.motor import MotorAnalise
 
-def processar_telemetria(logs: List[Any], motor: MotorAnalise) -> Tuple[Dict[str, Tuple[List[int], List[float]]], Dict[str, int]]:
+def processar_telemetria(logs: list, motor: MotorAnalise) -> dict[str, tuple[list[int], list[float]]]:
     historico_sensores: Dict[str, Tuple[List[int], List[float]]] = {}
     contadores_sensores: Dict[str, int] = {}
 
