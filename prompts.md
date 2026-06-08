@@ -67,3 +67,13 @@ Para a tipagem estática, utilize o módulo `typing` (`Dict`, `Tuple`, `Any`, `L
 
 ### Justificativa da Adaptação da Equipe
 A equipe implementou uma suite de testes utilizando o framework nativo `unittest`, segmentando as validações em duas classes com responsabilidades distintas: `TestRegrasValidacao` (para garantir a exatidão matemática nas fronteiras de transição de status) e `TestMotorAnaliseDefensivo` (para validar a resiliência contra dados corrompidos). 
+
+---
+
+## Iteração 6: Visualização de Gráficos
+**Usuário:** Como posso mostrar os gráficos dos sensores usando `matplotlib` e criar um menu no terminal para o usuário escolher o sensor?
+
+**Consultor:** Separe a lógica em módulos: o processador organiza os dados em um dicionário com os eixos X e Y, o módulo de gráficos (`graphic.py`) renderiza as linhas, e a interface (`interface.py`) gerencia o menu de escolha. Para o gráfico não ficar distorcido, filtre os logs para ignorar os registros com status `"Dado corrompido"`. 
+
+### Justificativa da Adaptação da Equipe
+A equipe desenvolveu os módulos `graphic.py` e `interface.py`. A decisão técnica foi isolar a geração de gráficos da lógica do motor. Filtramos a estrutura de dados para impedir que valores corrompidos fossem plotados, garantindo a fidelidade do gráfico.
