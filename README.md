@@ -1,42 +1,38 @@
-# Motor de Telemetria
+# Telemetry Analysis Engine
 
-Sistema modular para processamento, análise estatística, validação e visualização gráfica de fluxos de telemetria baseados em médias móveis.
-
----
-
-## Integrantes
-
-Henrique Nunes Mororó — RM 574073
-
-Bernardo de Paula Rodrigues — RM 572376
-
-Arthur Moreira Costa — RM 571532
+A modular system designed for processing, statistical analysis, validation, and graphical visualization of telemetry data streams utilizing moving averages.
 
 ---
 
-## Arquitetura do Projeto
+## Team Members
 
-O projeto é estruturado em módulos independentes com responsabilidades bem definidas:
-
-* **`app.py` (Execução):** Ponto de entrada do sistema. Carrega as configurações, coordena o fluxo entre o processador de dados, a interface com o usuário e a geração de gráficos.
-* **`motor.py` (Cálculo):** Contém a classe `MotorAnalise`. Mantém o histórico volátil dos sensores, calcula a média móvel das últimas 3 leituras e invoca dinamicamente as regras de validação via reflexão (`getattr`).
-* **`regras.py` (Validação):** Contém a interface abstrata `RegraValidacao` e os algoritmos de análise:
-  * `ValidacaoLimiteSimples`: Validação linear padrão (Normal, Alerta, Crítico).
-  * `ValidacaoLimiteDuplo`: Validação bimodal para sensores que operam em faixas ótimas centrais e possuem limites em ambas as extremidades.
-* **`processo.py` (Processamento):** Consome os logs brutos da telemetria, gerencia os contadores de mensagens de hardware e estrutura as séries temporais limpas para plotagem.
-* **`interface.py` (Menu):** Controla a interface iterativa no terminal. Exibe as opções de sensores válidos disponíveis e trata de forma defensiva falhas de entrada do operador.
-* **`graphic.py` (Plotagem):** Responsável por gerar os gráficos de linha temporais utilizando a biblioteca `matplotlib` com base nos dados processados do sensor selecionado.
-* **`dados.py` (Logs):** Simula uma massa de dados de sensores em tempo real, contendo leituras normais e dados corrompidos para testes de estresse.
+* **Henrique Nunes Mororó** — RM 574073
+* **Bernardo de Paula Rodrigues** — RM 572376
+* **Arthur Moreira Costa** — RM 571532
 
 ---
 
-## Destaques Técnicos
+## System Architecture
 
-* **Programação Defensiva:** Tratamento seletivo de exceções (`ValueError`, `KeyError`, `TypeError`, `AttributeError`). O sistema isola payloads corrompidos (strings inválidas, arrays incorretos ou sensores sem configuração) sem derrubar a aplicação.
-* **Uso de Memória Otimizado:** Uso de `collections.deque(maxlen=3)` para garantir janelas fixas por sensor com complexidade de inserção $O(1)$ e descarte automático de leituras obsoletas.
-* **Tipagem Estrita:** Uso de *Type Hints* verificados via `mypy`, garantindo que todas as assinaturas de métodos, retornos de salvaguarda e instâncias dinâmicas respeitem estritamente a arquitetura do sistema.
-* **Integridade de Séries Temporais:** Filtração ativa de dados no pipeline de processamento que impede que registros marcados como `"Dado corrompido"` injetem valores nulos ou de *fallback* (como `0.0`) nos gráficos, evitando distorções nas linhas de tendência.
-* **Interface Limpa:** Uso de códigos de escape ANSI padronizados de forma restrita para colorir apenas os cabeçalhos de seção e os status dinâmicos (`Normal`, `Alerta`, `CRÍTICO`), otimizando a legibilidade sem gerar poluição visual no terminal.
-* **Testes de Fronteira:** Suite de testes automatizados via `unittest` que valida exaustivamente os limites de desigualdade estrita ($>$ e $<$) sob precisão de ponto flutuante.
+The project is structured into independent modules with strict separation of concerns:
+
+* **`app.py` (Execution):** The system entry point. Orchestrates the execution flow by loading configurations, invoking the data processor, handling user interaction, and triggering graph generation.
+* **`motor.py` (Core Engine):** Implements the `MotorAnalise` class. Manages the volatile history of sensor states, calculates moving averages over a fixed window of the last 3 readings, and dynamically resolves validation rules via reflection (`getattr`).
+* **`regras.py` (Validation Layer):** Defines the `RegraValidacao` abstract base class (ABC) and specific analytical algorithms:
+  * `ValidacaoLimiteSimples`: Linear range validation (Normal, Alert, Critical).
+  * `ValidacaoLimiteDuplo`: Bimodal validation for sensors operating within a central optimal range with upper and lower boundary thresholds.
+* **`processo.py` (Data Processing):** Consumes raw telemetry logs, tracks hardware message sequences, and structures cleaned time-series data optimized for visualization.
+* **`interface.py` (User Interface):** Manages interactive terminal menus. Dynamically lists available operational sensors and implements defensive validation against invalid operator inputs.
+* **`graphic.py` (Visualization):** Renders sequential line charts using `matplotlib` based on the processed time-series metrics of the selected sensor.
+* **`dados.py` (Data Source):** Simulates real-time telemetry data streams, containing standard operational readings and corrupted payloads for system stress testing.
 
 ---
+
+## Technical Highlights
+
+* **Defensive Programming:** Granular exception handling targeting `ValueError`, `KeyError`, `TypeError`, and `AttributeError`. The application isolates malformed payloads—such as invalid string states, incorrect array structures, or unconfigured sensors—without disrupting overall system execution.
+* **Optimized Memory Footprint:** Utilizes `collections.deque(maxlen=3)` to maintain sliding window telemetry buffers per sensor, ensuring $O(1)$ insertion complexity and automated eviction of obsolete data points.
+* **Strict Type Hinting:** Codebase fully annotated with Type Hints verified via `mypy` to enforce structural integrity across method signatures, safeguard return values, and dynamic instances.
+* **Time-Series Integrity:** Implements active filtering in the data pipeline to prevent corrupted records (`"Dado corrompido"`) from injecting null parameters or structural fallbacks (e.g., `0.0`) into the datasets, eliminating statistical distortion in trend lines.
+* **Refined Terminal UI:** Employs standardized ANSI escape sequences exclusively for critical boundaries, section headers, and dynamic operational states (`Normal`, `Alerta`, `CRÍTICO`), enhancing operator scannability without visual clutter.
+* **Boundary Testing:** Includes an automated test suite driven by `unittest` designed to validate strict inequality limits ($>$ and $<$) under precise floating-point operations.
